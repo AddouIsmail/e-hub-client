@@ -8,8 +8,7 @@
  *
  * Main module of the application.
  */
-angular
-    .module('eHubClientApp', [
+angular.module('eHubClientApp', [
     'ngAnimate',
     'ngAria',
     'ngMessages',
