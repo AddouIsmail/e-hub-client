@@ -20,9 +20,9 @@ angular.module('eHubClientApp', [
     $routeProvider
         .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'IndexCtrl',
+        controller: 'CategoryCtrl',
         controllerAs: 'main'
-    })
+    })        
         .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
