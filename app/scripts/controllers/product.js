@@ -9,11 +9,15 @@ angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Produc
 	 		$scope.products=allProducts;
  	 }); //query() returns all the entries
 
- // $scope.productService = new Product(); //You can instantiate resource class
+ 	 var allCategories = Category.query(function() {
+	 		$scope.categories=allCategories;
+ 	 }); //query() returns all the entries
 
 
+});
+
+//TEMPLATE FOR SAVING
 /*
   Entry.save($scope.entry, function() {
     //data saved. do something here.
   }); //saves an entry. Assuming $scope.entry is the Entry object  */
-});
