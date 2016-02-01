@@ -8,6 +8,6 @@
  * Controller of the eHubClientApp
  */
  angular.module('eHubClientApp')
-  .controller('AboutCtrl', function () {
-    
-  });
+	.controller('AboutCtrl', function () {
+
+});
