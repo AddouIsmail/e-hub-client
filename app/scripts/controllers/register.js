@@ -11,8 +11,8 @@ angular.module('eHubClientApp')
     .controller('RegisterCtrl', function ($scope,$http) {
     $scope.client={};
     $scope.addClient = function(client){
-        $http.get('http://localhost:8080/clients').success(function(response){
-            console.log('http://localhost:8080/clients');
+        $http.get('http://localhost:8080/client').success(function(response){
+            console.log('http://localhost:8080/client');
             console.log(response);
         }).error(function(response){
             console.log(response);

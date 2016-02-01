@@ -7,7 +7,7 @@
  * # AboutCtrl
  * Controller of the eHubClientApp
  */
-angular.module('eHubClientApp')
+ angular.module('eHubClientApp')
   .controller('AboutCtrl', function () {
     
   });

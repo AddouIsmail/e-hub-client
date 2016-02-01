@@ -36,6 +36,11 @@ angular.module('eHubClientApp', [
         controller: 'RegisterCtrl',
         controllerAs: 'register'
     })
+        .when('/test', {
+        templateUrl: 'views/test.html',
+        controller: 'ProductCtrl',
+        controllerAs: 'product'
+    })
         .otherwise({
         redirectTo: '/'
     });
