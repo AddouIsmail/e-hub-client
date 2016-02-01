@@ -31,21 +31,20 @@
 
 
 
-angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Entry) {
-	var entry = function(){
-		Entry.get({ id: $scope.id }, function() {
-		console.log(entry);
-  })}; // get() returns a single entry
+angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Product) {
+	$scope.getOneProduct = function(idproduct){
+	 		$scope.product=Product.get({ id: idproduct }); // get() returns a single entry
+	 	}
 
-	var entries = Entry.query(function() {
-		console.log(entries);
-  }); //query() returns all the entries
+	 var allProducts = Product.query(function() {
+	 		$scope.products=allProducts;
+ 	 }); //query() returns all the entries
 
-  $scope.entry = new Entry(); //You can instantiate resource class
+ // $scope.productService = new Product(); //You can instantiate resource class
 
-  $scope.entry.data = 'some data';
 
+/*
   Entry.save($scope.entry, function() {
     //data saved. do something here.
-  }); //saves an entry. Assuming $scope.entry is the Entry object  
+  }); //saves an entry. Assuming $scope.entry is the Entry object  */
 });
