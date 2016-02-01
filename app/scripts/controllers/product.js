@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Product) {
+angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Product,Category) {
 	$scope.getOneProduct = function(idproduct){
 	 		$scope.product=Product.get({ id: idproduct }); // get() returns a single entry
 	 	}

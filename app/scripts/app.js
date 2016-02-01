@@ -20,8 +20,8 @@ angular.module('eHubClientApp', [
     $routeProvider
         .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'IndexCtrl',
-        controllerAs: 'main'
+        controller: 'CategoryCtrl',
+        controllerAs: 'categoryController'
     })
         .when('/about', {
         templateUrl: 'views/about.html',
@@ -36,10 +36,10 @@ angular.module('eHubClientApp', [
         controller: 'RegisterCtrl',
         controllerAs: 'register'
     })
-        .when('/test', {
-        templateUrl: 'views/test.html',
-        controller: 'CategoryCtrl',
-        controllerAs: 'categoryController'
+        .when('/products', {
+        templateUrl: 'views/products.html',
+        controller: 'ProductCtrl',
+        controllerAs: 'product'
     })      
         .otherwise({
         redirectTo: '/'
