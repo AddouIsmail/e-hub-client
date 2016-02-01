@@ -20,7 +20,7 @@ angular.module('eHubClientApp', [
     $routeProvider
         .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+        controller: 'IndexCtrl',
         controllerAs: 'main'
     })
         .when('/about', {
@@ -35,7 +35,7 @@ angular.module('eHubClientApp', [
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl',
         controllerAs: 'register'
-    })
+    })        
         .otherwise({
         redirectTo: '/'
     });
