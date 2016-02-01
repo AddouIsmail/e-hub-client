@@ -36,11 +36,11 @@ angular.module('eHubClientApp', [
         controller: 'RegisterCtrl',
         controllerAs: 'register'
     })
-        .when('/test', {
+        .when('/product', {
         templateUrl: 'views/test.html',
         controller: 'ProductCtrl',
         controllerAs: 'product'
-    })
+    })      
         .otherwise({
         redirectTo: '/'
     });
