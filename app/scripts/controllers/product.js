@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Product,Category) {
+
+
+angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Product,Category,basketProvider) {
 	$scope.getOneProduct = function(idproduct){
 	 		$scope.product=Product.get({ id: idproduct }); // get() returns a single entry
 	 	}
@@ -13,7 +15,14 @@ angular.module('eHubClientApp').controller('ProductCtrl',function($scope, Produc
 	 		$scope.categories=allCategories;
  	 }); //query() returns all the entries
 
+ 	 var basket=basketProvider.getBasketItems(function(){
+ 	 	$scope.basket=basket;
+ 	 });
 
+ 	 $scope.addToBasket=function(id,quantity){
+ 	 	var productItem={"id":id,"quantity":quantity};
+ 	 	$scope.basket=basketProvider.add(productItem);
+ 	 }
 });
 
 //TEMPLATE FOR SAVING
