@@ -21,8 +21,8 @@ angular.module('eHubClientApp', [
         .when('/', {
         templateUrl: 'views/main.html',
         controller: 'CategoryCtrl',
-        controllerAs: 'main'
-    })        
+        controllerAs: 'categoryController'
+    })
         .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
@@ -36,8 +36,8 @@ angular.module('eHubClientApp', [
         controller: 'RegisterCtrl',
         controllerAs: 'register'
     })
-        .when('/product', {
-        templateUrl: 'views/test.html',
+        .when('/products', {
+        templateUrl: 'views/products.html',
         controller: 'ProductCtrl',
         controllerAs: 'product'
     })      
