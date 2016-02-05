@@ -17,4 +17,5 @@ angular.module('eHubClientApp').service('basketProvider', function ($cookies) {
         Basket=$cookies.getObject('basket');
         return Basket;
     }
+    
  });

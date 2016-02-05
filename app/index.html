@@ -19,7 +19,7 @@
 
         <!-- endbuild -->
     </head>
-    <body ng-app="eHubClientApp">
+    <body ng-app="eHubClientApp" ng-controller="IndexCtrl">
         <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -639,15 +639,19 @@
         <script src="scripts/services/category.js"></script>
         <script src="scripts/services/client.js"></script>
         <!-- END services -->
-        <!-- controllers -->
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/register.js"></script>
-        <script src="scripts/controllers/categoryController.js"></script>
-        <script src="scripts/controllers/product.js"></script>
+        <!-- controllers -->        
+        <script src="scripts/controllers/indexController.js"></script>
+        <script src="scripts/controllers/mainController.js"></script>
+        <script src="scripts/controllers/aboutController.js"></script>
+        <script src="scripts/controllers/registerController.js"></script>
+        <script src="scripts/controllers/productController.js"></script>
         <script src="scripts/controllers/clientController.js"></script>
+<<<<<<< HEAD
         <script src="scripts/controllers/categoryController.js"></script>
         <script src="scripts/controllers/productDetailsController.js"></script>
+=======
+        <!-- END controllers -->
+>>>>>>> 9560c9988754604b60f3b67895710342d9409193
         <!-- endbuild -->
                 <script>
             jQuery(document).ready(function($){

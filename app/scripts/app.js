@@ -27,9 +27,9 @@
     $routeProvider
     .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'CategoryCtrl',
-        controllerAs: 'categoryController'
-    })
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+    })               
     .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
@@ -43,7 +43,7 @@
         controller: 'RegisterCtrl',
         controllerAs: 'register'
     })
-    .when('/products', {
+        .when('/products/:id?', {
         templateUrl: 'views/products.html',
         controller: 'ProductCtrl',
         controllerAs: 'product'
