@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/megamenu.css">
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/etalage.css">
 
         <!-- endbuild -->
     </head>
@@ -615,6 +616,8 @@
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -622,11 +625,12 @@
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <script src="scripts/menu_jquery.js"></script>
         <script src="scripts/simpleCart.min.js"> </script>
-
+        <script src="scripts/jquery.etalage.min.js"></script>
         <script type="application/x-javascript">
             addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); }
         </script>
+
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -643,7 +647,23 @@
         <script src="scripts/controllers/product.js"></script>
         <script src="scripts/controllers/clientController.js"></script>
         <script src="scripts/controllers/categoryController.js"></script>
+        <script src="scripts/controllers/productDetailsController.js"></script>
         <!-- endbuild -->
+                <script>
+            jQuery(document).ready(function($){
 
+                $('#etalage').etalage({
+                    thumb_image_width: 300,
+                    thumb_image_height: 400,
+                    source_image_width: 900,
+                    source_image_height: 1200,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
+
+            });
+        </script>
     </body>
 </html>

@@ -14,8 +14,15 @@
     'ngMessages',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ngCookies',
+    'LocalStorageModule'
     ])
+     .config(function (localStorageServiceProvider) {
+      localStorageServiceProvider.setStorageType('sessionStorage')
+      .setPrefix('eHubClientApp')
+      .setNotify(true,true);
+    })
  .config(function ($routeProvider) {
     $routeProvider
     .when('/', {
@@ -43,8 +50,13 @@
     })      
     .when('/product/:id?', {
         templateUrl: 'views/product-details.html',
-        controller: 'ProductCtrl',
+        controller: 'ProductDetailsCtrl',
         controllerAs: 'product'
+    })   
+    .when('/test', {
+        templateUrl: 'views/test.html',
+        controller: 'ProductDetailsCtrl',
+        controllerAs: 'product-details'
     })      
     .otherwise({
         redirectTo: '/'
