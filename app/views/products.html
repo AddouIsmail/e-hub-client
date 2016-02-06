@@ -1,3 +1,101 @@
+<div class="women_main">
+	<!-- start sidebar -->
+	<div class="col-md-3 s-d">
+	  <div class="w_sidebar">
+		<div class="w_nav1">
+			<ul>
+				<li ng-repeat="category in categories | unique: 'superSuperCategory'">
+					<a ng-click="showSuperSuperCategory(category.superSuperCategory)" href="#/products">
+						<span ng-class="(category.superSuperCategory == currentCategory.superSuperCategory)? 'text-primary':''">{{ category.superSuperCategory }}</span>
+					</a>
+				</li>
+			</ul>	
+		</div>
+		<h3>FILTRER PAR</h3>
+		<section  class="sky-form">
+			<h4>sous-catogories</h4>
+			<div class="row1 scroll-pane">
+				<label class="checkbox" ng-repeat="category in categories | filter: {'superCategory': currentCategory.superCategory } | filter: {'superSuperCategory': currentCategory.superSuperCategory } ">
+					<input type="checkbox" name="checkbox" ng-checked="category.name == currentCategory.name" ng-click="addToChosenCat(category.id)"><i></i>{{ category.name }}
+				</label>								
+			</div>
+		</section>
+		<section  class="sky-form">
+			<h4>marques</h4>
+			<div class="row1 scroll-pane">												
+				<label class="checkbox" ng-repeat="product in products | filter: {'idCategory': currentCategory.id } | unique: 'brand'">
+					<input type="checkbox" name="checkbox" ng-click="addToChosenBrand(product.brand)"><i></i>{{ product.brand }}
+				</label>							
+			</div>
+		</section>
+		<section class="sky-form">
+			<h4>colour</h4>
+			<ul class="w_nav2">
+				<li><a class="color1" href="#"></a></li>
+				<li><a class="color2" href="#"></a></li>
+				<li><a class="color3" href="#"></a></li>
+				<li><a class="color4" href="#"></a></li>
+				<li><a class="color5" href="#"></a></li>
+				<li><a class="color6" href="#"></a></li>
+				<li><a class="color7" href="#"></a></li>
+				<li><a class="color8" href="#"></a></li>
+				<li><a class="color9" href="#"></a></li>
+				<li><a class="color10" href="#"></a></li>
+				<li><a class="color12" href="#"></a></li>
+				<li><a class="color13" href="#"></a></li>
+				<li><a class="color14" href="#"></a></li>
+				<li><a class="color15" href="#"></a></li>
+				<li><a class="color5" href="#"></a></li>
+				<li><a class="color6" href="#"></a></li>
+				<li><a class="color7" href="#"></a></li>
+				<li><a class="color8" href="#"></a></li>
+				<li><a class="color9" href="#"></a></li>
+				<li><a class="color10" href="#"></a></li>
+			</ul>
+		</section>
+		<section class="sky-form">
+			<h4>discount</h4>
+			<div class="row1 scroll-pane">
+				<div class="col col-4">
+					<label class="radio" ng-repeat="i in [90,80,70,60,50,40,30,20,10]"><input type="radio" name="radio" ng-click="setChosenDiscount(i)"><i></i>{{ i }} %</label>					
+				</div>
+			</div>						
+		</section>
+	</div>
+   </div>
+	<!-- start content -->
+	<div class="col-md-9 w_content">
+		<div class="women">
+			<a href="#"><h4>{{ filtered.length }} articles</span> </h4></a>
+			<ul class="w_nav">
+						<li>Trier : </li>
+		     			<li><a class="active" href="#">Prix</a></li> |
+		     			<li><a href="#">Remise </a></li> |
+		     			<div class="clear"></div>	
+		     </ul>
+		     <div class="clearfix"></div>	
+		</div>
+		<!-- grids_of_4 -->
+		<div ng-repeat="product in filtered = (products | filterWithOr : {'idCategory' : (chosenCategories.length == 0? '':chosenCategories)} | filterWithOr : {'brand' : (chosenBrands.length == 0? '':chosenBrands)} | filter : {'discount': chosenDiscount} | filter : {'superSuperCategory' : chosenSuperCategory})">									
+			<div class="grid1_of_4" style="margin:7px;">
+				<div class="content_box"><a href="details.html">
+					<img src="http://localhost:8080/pictures/products/{{ product.name }}/{{ product.pictures[0] }}" class="img-responsive" alt=""/>
+					</a>
+					<h4><a href="details.html"> {{ product.name }}</a></h4>
+					<p>{{ product.description }}</p>
+					<div class="grid_1 simpleCart_shelfItem">
+						<div class="item_add"><span class="item_price"><h6>{{ product.buyPrice * product.discount }} DHS</h6></span></div>
+						<div class="item_add"><span class="item_price"><a href="#">ajouter au panier</a></span></div>
+					</div>
+			   	</div>
+			</div>
+		</div>
+						  			
+	</div>					
+	<div class="clearfix"></div>	
+	<!-- end content -->
+</div>
+</div>
 <div ng-repeat="product in products | filter: {'idCategory': idCategory}">
 	{{ product }}
 </div>

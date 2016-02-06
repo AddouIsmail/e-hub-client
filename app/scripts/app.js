@@ -41,7 +41,7 @@
         controller: 'ProductCtrl',
         controllerAs: 'product'
     })      
-    .when('/product/:id?', {
+        .when('/product/:id?', {
         templateUrl: 'views/product-details.html',
         controller: 'ProductCtrl',
         controllerAs: 'product'
