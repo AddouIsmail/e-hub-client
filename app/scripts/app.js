@@ -15,14 +15,8 @@
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngCookies',
-    'LocalStorageModule'
+    'ngCookies' 
     ])
-     .config(function (localStorageServiceProvider) {
-      localStorageServiceProvider.setStorageType('sessionStorage')
-      .setPrefix('eHubClientApp')
-      .setNotify(true,true);
-    })
  .config(function ($routeProvider) {
     $routeProvider
     .when('/', {
@@ -48,7 +42,7 @@
         controller: 'ProductCtrl',
         controllerAs: 'product'
     })      
-    .when('/product/:id?', {
+        .when('/product/:id?', {
         templateUrl: 'views/product-details.html',
         controller: 'ProductDetailsCtrl',
         controllerAs: 'product'
@@ -61,4 +55,35 @@
     .otherwise({
         redirectTo: '/'
     });
+})
+ .controller('loginCtrl',function($rootScope,$http,ClientService){
+  $rootScope.LoginAction=function(login,pass){
+    $http.get('http://localhost:8080/client/authentification/'+login).success(function (argument) {
+        if(argument.login==login && argument.password==pass){
+            console.log('authenticated');
+            $rootScope.currentUser=argument;
+            console.log(ClientService.add(argument));
+        }else{
+            console.log(argument);
+            alert("email ou mot de passe incorrect ! ");
+        }
+    }).error(function (argument) {
+        console.log('error: '+argument);
+        return null;
+    });             
+};
+
+$rootScope.currentUser=ClientService.getall();
+$rootScope.DisconnectAction=function(){
+    if($rootScope.currentUser==null)
+        console.log("null");
+    else
+        console.log('before: '+$rootScope.currentUser);
+    ClientService.removeUserCookie();
+    if($rootScope.currentUser==null)
+        console.log("null");
+    else
+        console.log('after: '+$rootScope.currentUser);          
+    $rootScope.currentUser=null;
+}
 });

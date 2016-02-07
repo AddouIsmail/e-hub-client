@@ -19,7 +19,7 @@
 
         <!-- endbuild -->
     </head>
-    <body ng-app="eHubClientApp" ng-controller="IndexCtrl">
+    <body ng-app="eHubClientApp" ng-controller="loginCtrl">
         <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -53,7 +53,7 @@
                     <!-- start header_right -->
                     <div class="header_right">
                         <div class="rgt-bottom">
-                            <div class="log">
+                            <div class="log" ng-show="currentUser==null">
                                 <div class="login" >
                                     <div id="loginContainer"><a href="#" id="loginButton"><span>Login</span></a>
                                         <div id="loginBox">                
@@ -61,35 +61,36 @@
                                                 <fieldset id="body">
                                                     <fieldset>
                                                         <label for="email">Email Address</label>
-                                                        <input type="text" name="email" id="email">
+                                                        <input type="text" ng-model="login" ng-value="{{login}}" name="login" id="email">
                                                     </fieldset>
                                                     <fieldset>
                                                         <label for="password">Password</label>
-                                                        <input type="password" name="password" id="password">
+                                                        <input type="password" ng-model="password" value="{{password}}" name="password" id="password">
                                                     </fieldset>
-                                                    <input type="submit" id="login" value="Sign in">
+                                                    <input type="submit" id="login" value="Sign in" ng-click="LoginAction(login,password)">
                                                     <label for="checkbox"><input type="checkbox" id="checkbox"> <i>Remember me</i></label>
                                                 </fieldset>
-                                                <span><a href="#">Forgot your password?</a></span>
+                                                <span><a ng-href="#">Forgot your password?</a></span>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="reg">
+                            <div class="reg" ng-show="currentUser==null">
                                 <a ng-href="#/register">REGISTER</a>
                             </div>
-                            <div class="cart box_1">
+                            <div class="cart box_1" ng-show="currentUser!=null">
                                 <a href="checkout.html">
-                                    <h3> <span class="simpleCart_total">$0.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)<img src="images/bag.png" alt=""></h3>
-                                </a>	
-                                <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p>
+                                    <h3><span>${{totalPrice}}</span> ({{basketsize}} items)<img src="images/bag.png" alt=""></h3>
+                                </a>    
+                                <p><a href="" class="">(empty card)</a></p>
                                 <div class="clearfix"> </div>
                             </div>
-                            <div class="create_btn">
-                                <a href="checkout.html">CHECKOUT</a>
-                            </div>
-                            <div class="clearfix"> </div>
+                            <div ng-show="currentUser!=null" style="float:right;">
+                                <a  class="btn btn-labeled btn-danger btn-small"  ng-click="DisconnectAction()"><span class="glyphicon glyphicon-off"></span></a>
+                            </div>     
+                            <div class="clearfix">
+                             </div>
                         </div>
                         <div class="search">
                             <form>
@@ -111,7 +112,7 @@
                                     <div class="h_nav">
                                         <h4>Téléphones portables</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'TELEPHONES PORTABLES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'TELEPHONES PORTABLES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -119,7 +120,7 @@
                                     <div class="h_nav">
                                         <h4>accessoires</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'ACCESSOIRES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'ACCESSOIRES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -127,7 +128,7 @@
                                     <div class="h_nav">
                                         <h4>téléphonie fixe</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'TELEPHONIE FIXE'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'TELEPHONIE FIXE'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>												
                                 </div>
@@ -135,7 +136,7 @@
                                     <div class="h_nav">
                                         <h4>tablettes</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'TABLETTES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'TELEPHONIE'} | filter: {'superCategory': 'TABLETTES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>   
                                     </div>                                              
                                 </div>
@@ -173,7 +174,7 @@
                                     <div class="h_nav">
                                         <h4>chaussures</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'CHAUSSURES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'CHAUSSURES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -181,7 +182,7 @@
                                     <div class="h_nav">
                                         <h4>vêtements</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'VETEMENTS'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'VETEMENTS'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -189,7 +190,7 @@
                                     <div class="h_nav">
                                         <h4>accessoires</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'ACCESSOIRES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'ACCESSOIRES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>												
                                 </div>
@@ -197,7 +198,7 @@
                                     <div class="h_nav">
                                         <h4>bagagerie</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'BAGAGERIE'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE HOMMES'} | filter: {'superCategory': 'BAGAGERIE'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>						
                                 </div>
@@ -213,8 +214,8 @@
                                     <div class="h_nav">
                                         <h4>nos meilleures ventes</h4>
                                         <ul>
-                                            <li><a href="women.html">Nos Nouveautés</a></li>
-                                            <li><a href="women.html">Promotions</a></li>
+                                            <li><a href="#">Nos Nouveautés</a></li>
+                                            <li><a href="#">Promotions</a></li>
                                         </ul>   
                                     </div>
                                 </div>                                
@@ -235,7 +236,7 @@
                                     <div class="h_nav">
                                         <h4>chaussures</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'CHAUSSURES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'CHAUSSURES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>   
                                     </div>                          
                                 </div>
@@ -243,7 +244,7 @@
                                     <div class="h_nav">
                                         <h4>vêtements</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'VETEMENTS'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'VETEMENTS'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>   
                                     </div>                          
                                 </div>
@@ -251,7 +252,7 @@
                                     <div class="h_nav">
                                         <h4>accessoires</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'ACCESSOIRES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'ACCESSOIRES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>   
                                     </div>                                              
                                 </div>
@@ -259,7 +260,7 @@
                                     <div class="h_nav">
                                         <h4>bagagerie</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'BAGAGERIE'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'MODE FEMMES'} | filter: {'superCategory': 'BAGAGERIE'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>   
                                     </div>                      
                                 </div>
@@ -289,7 +290,7 @@
                                     <div class="h_nav">
                                         <h4>nutrition</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'NUTRITION'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'NUTRITION'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -297,7 +298,7 @@
                                     <div class="h_nav">
                                         <h4>fitness & musculation</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'FITNESS & MUSCULATION'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'FITNESS & MUSCULATION'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -305,7 +306,7 @@
                                     <div class="h_nav">
                                         <h4>sport d'équipe</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'SPORT D\'EQUIPE'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'SPORT D\'EQUIPE'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>												
                                 </div>
@@ -313,7 +314,7 @@
                                     <div class="h_nav">
                                         <h4>cyclisme & plein air</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'CYCLISME & PLEIN AIR'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'CYCLISME & PLEIN AIR'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>						
                                 </div>
@@ -321,7 +322,7 @@
                                     <div class="h_nav">
                                         <h4>sports extrêmes</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'SPORT EXTREMES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'SPORT & LOISIRS'} | filter: {'superCategory': 'SPORT EXTREMES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>
                                 </div>
@@ -352,7 +353,7 @@
                                     <div class="h_nav">
                                         <h4>maquillage</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'MAQUILLAGE'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'MAQUILLAGE'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -360,7 +361,7 @@
                                     <div class="h_nav">
                                         <h4>parapharmacie</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'PARAPHARMACIE'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'PARAPHARMACIE'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -368,7 +369,7 @@
                                     <div class="h_nav">
                                         <h4>parfums homme</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'PARFUMS HOMME'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'PARFUMS HOMME'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>												
                                 </div>
@@ -376,7 +377,7 @@
                                     <div class="h_nav">
                                         <h4>parfums femme</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'PARFUMS FEMME'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'BEAUTE,HYGIENE & SANTE'} | filter: {'superCategory': 'PARFUMS FEMME'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>						
                                 </div>
@@ -415,7 +416,7 @@
                                     <div class="h_nav">
                                         <h4>ordinateurs portables</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'ORDINATEURS PORTABLES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'ORDINATEURS PORTABLES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -423,7 +424,7 @@
                                     <div class="h_nav">
                                         <h4>imprimantes & scanners</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'IMPRIMANTES ET SCANNERS'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'IMPRIMANTES ET SCANNERS'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>
@@ -431,7 +432,7 @@
                                     <div class="h_nav">
                                         <h4>ordinateurs fixes</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'ORDINATEURS FIXES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'ORDINATEURS FIXES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>												
                                 </div>
@@ -439,7 +440,7 @@
                                     <div class="h_nav">
                                         <h4>périphériques & accessoires</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'PÉRIPHÉRIQUES & ACCESSOIRES'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'PÉRIPHÉRIQUES & ACCESSOIRES'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>						
                                 </div>
@@ -447,7 +448,7 @@
                                     <div class="h_nav">
                                         <h4>gaming et graphisme</h4>
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'GAMING & GRAPHISME'}"><a href="women.html">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'INFORMATIQUE & BUREAU'} | filter: {'superCategory': 'GAMING & GRAPHISME'}"><a href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>
                                 </div>
@@ -476,7 +477,7 @@
                                 <div class="col1">
                                     <div class="h_nav" style="width:250px;">
                                         <ul>
-                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'AUTRE'}"><a ng-href="">{{ categorie.name }}</a></li>
+                                            <li ng-repeat="categorie in categories | filter: {'superSuperCategory':'AUTRE'}"><a ng-href="#/products/{{ categorie.id }}">{{ categorie.name }}</a></li>
                                         </ul>	
                                     </div>							
                                 </div>                                
@@ -617,7 +618,6 @@
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -646,12 +646,14 @@
         <script src="scripts/controllers/registerController.js"></script>
         <script src="scripts/controllers/productController.js"></script>
         <script src="scripts/controllers/clientController.js"></script>
-<<<<<<< HEAD
-        <script src="scripts/controllers/categoryController.js"></script>
         <script src="scripts/controllers/productDetailsController.js"></script>
-=======
         <!-- END controllers -->
->>>>>>> 9560c9988754604b60f3b67895710342d9409193
+
+        <!-- filters -->
+        <script src="scripts/filters/unique.js"></script>
+        <script src="scripts/filters/filterMultiple.js"></script>
+        <!-- END filters -->
+
         <!-- endbuild -->
                 <script>
             jQuery(document).ready(function($){

@@ -54,8 +54,8 @@
 						<div class="clearfix"></div>		
 					</div>
 					<div class="desc1 span_3_of_2">
-						<h3>soluta nobis eleifend option</h3>
-						<span class="brand">Brand: <a href="#">Sed do eiusmod </a></span>
+						<h3>{{product.name}}</h3>
+						<span class="brand">Brand: <a href="#">{{product.brand}} </a></span>
 						<br>
 						<span class="code">Product Code: {{product.id}}</span>
 						<p>{{product.description}}</p>
@@ -76,9 +76,9 @@
 							</div>
 						</div>
 						<div class="btn_form">
-							<a href="checkout.html">buy</a>
+							<a ng-click="addToBasket(product.id,product.quantity,product.buyPrice)">buy</a>
 						</div>
-						<a href="#"><span>login to save in wishlist </span></a>
+						<a href="#" ng-show="currentUser==null"><span>login to save in wishlist </span></a>
 
 					</div>
 					<div class="clearfix"></div>
@@ -96,14 +96,14 @@
 									<img src="images/w8.jpg" class="img-responsive " alt=""/>
 								</div>
 								<div class="prod1-desc">
-									<h5><a class="product_link" href="#">{{p.name}}</a></h5>
+									<h5><a class="product_link" ng-href="/#/product/{{p.id}}">{{p.name}}</a></h5>
 									<p class="product_descr">{{p.description}} </p>									
 								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="product_price">
 								<span class="price-access">${{p.buyPrice}}</span>								
-								<button class="button1"><span>Add to cart</span></button>
+								<button class="button1" ng-click="addToBasket(p.id,p.quantity,p.buyPrice)"><span>Add to cart</span></button>
 							</div>
 							<div class="clearfix"></div>
 						</div>
