@@ -5,8 +5,8 @@
 		<div class="w_nav1">
 			<ul>
 				<li ng-repeat="category in categories | unique: 'superSuperCategory'">
-					<a ng-click="showSuperSuperCategory(category.superSuperCategory)" href="#/products">
-						<span ng-class="(category.superSuperCategory == currentCategory.superSuperCategory)? 'text-primary':''">{{ category.superSuperCategory }}</span>
+					<a ng-click="showSuperSuperCategory(category.superSuperCategory)">
+						<span ng-class="(category.superSuperCategory == currentCategory.superSuperCategory || category.superSuperCategory == chosenSuperCategory)? 'text-primary':''">{{ category.superSuperCategory }}</span>
 					</a>
 				</li>
 			</ul>	
@@ -15,7 +15,7 @@
 		<section  class="sky-form">
 			<h4>sous-catogories</h4>
 			<div class="row1 scroll-pane">
-				<label class="checkbox" ng-repeat="category in categories | filter: {'superCategory': currentCategory.superCategory } | filter: {'superSuperCategory': currentCategory.superSuperCategory } ">
+				<label class="checkbox" ng-repeat="category in categories | filter: {'superCategory': currentCategory.superCategory } | filter: {'superSuperCategory': currentCategory.superSuperCategory } | filter: {'superSuperCategory': chosenSuperCategory } ">
 					<input type="checkbox" name="checkbox" ng-checked="category.name == currentCategory.name" ng-click="addToChosenCat(category.id)"><i></i>{{ category.name }}
 				</label>								
 			</div>
@@ -68,10 +68,10 @@
 		<div class="women">
 			<a href="#"><h4>{{ filtered.length }} articles</span> </h4></a>
 			<ul class="w_nav">
-						<li>Trier : </li>
-		     			<li><a class="active" href="#">Prix</a></li> |
-		     			<li><a href="#">Remise </a></li> |
-		     			<div class="clear"></div>	
+				<li>Trier : </li>
+     			<li><a class="active" href="#">Prix</a></li> |
+     			<li><a href="#">Remise </a></li> |
+     			<div class="clear"></div>	
 		     </ul>
 		     <div class="clearfix"></div>	
 		</div>
@@ -96,6 +96,6 @@
 	<!-- end content -->
 </div>
 </div>
-<div ng-repeat="product in products | filter: {'idCategory': idCategory}">
+<div ng-repeat="product in products | filter : {'idCategory' : chosenCategories }">
 	{{ product }}
 </div>

@@ -24,7 +24,7 @@ angular.module('eHubClientApp')
 		}
 		$scope.addToChosenBrand = function(brand){
 			var i = $scope.chosenBrands.indexOf(brand);
-			if(i > -1){
+			if(i > -1) {
 				$scope.chosenBrands.splice(i, 1);
 			}
 			else{
@@ -32,9 +32,12 @@ angular.module('eHubClientApp')
 			}
 			console.log($scope.chosenBrands);
 		}
-		$scope.showSuperSuperCategory = function(superSuperCategory){
-			$scope.currentCategory.superSuperCategory = superSuperCategory; 
+		$scope.showSuperSuperCategory = function(superSuperCategory){			
 			$scope.chosenSuperCategory = superSuperCategory;			
+			$scope.currentCategory = null;
+			$scope.chosenCategories = [];
+			$scope.chosenBrands = [];
+			console.log($scope.chosenSuperCategory);
 		}
 		$scope.setChosenDiscount = function(discount){
 			$scope.chosenDiscount = discount;

@@ -20,17 +20,12 @@ angular.module('eHubClientApp')
         if ((angular.isObject(expected) && !angular.isArray(expected)) || (angular.isObject(actual) && !hasCustomToString(actual))) {
           // Should not compare primitives against objects, unless they have custom `toString` method
           return false;
-        }
-        console.log('ACTUAL EXPECTED')
-        console.log(actual)
-        console.log(expected)
+        }        
 
         actual = angular.lowercase('' + actual);
         if (angular.isArray(expected)) {
           var match = false;
-          expected.forEach(function (e) {
-            console.log('forEach')
-            console.log(e)
+          expected.forEach(function (e) {            
             e = angular.lowercase('' + e);
             if (actual.indexOf(e) !== -1) {
               match = true;
