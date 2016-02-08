@@ -2132,6 +2132,7 @@ p.product_descr {
 	display: inline-block;
 	font-size: 1em;
 	padding: 10px 34px;
+	margin: 15px;
 	background:#ff6978;
 	color:#fff;
 	text-transform:uppercase;

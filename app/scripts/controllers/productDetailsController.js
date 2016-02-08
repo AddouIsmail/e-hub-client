@@ -21,8 +21,8 @@ angular.module('eHubClientApp').controller('ProductDetailsCtrl',function($scope,
  	$rootScope.totalPrice=basketProvider.computeSum();
  	$rootScope.basketsize=basketProvider.BasketSize();
 
- 	$rootScope.addToBasket=function(id,idCategory,idSupplier,name,description,discount,quantity,shippedPrice){
- 	var productItem={"id":id, "idCategory": idCategory, "idSupplier":idSupplier ,"name":name,"description":description,"discount":discount , "quantity":quantity,"shippedPrice":shippedPrice};
+ 	$rootScope.addToBasket=function(id,idCategory,idSupplier,name,description,discount,quantity,shippedPrice,buyPrice,value){
+ 	var productItem={"id":id, "idCategory": idCategory, "idSupplier":idSupplier ,"name":name,"description":description,"discount":discount , "quantity":quantity,"shippedPrice":shippedPrice,"buyPrice":buyPrice,"quantityOrdered":value};
 	console.log("add to basket controller method");
 	$rootScope.basket=basketProvider.add(productItem);
  	$rootScope.totalPrice=basketProvider.computeSum();
@@ -32,8 +32,8 @@ angular.module('eHubClientApp').controller('ProductDetailsCtrl',function($scope,
  	 $rootScope.clearBasket=function(){
  	 	console.log("clearbasket controller method");
  	 	$scope.basket=basketProvider.clearBasket();
- 	$rootScope.totalPrice=basketProvider.computeSum();
- 	$rootScope.basketsize=basketProvider.BasketSize();
+	 	$rootScope.totalPrice=basketProvider.computeSum();
+	 	$rootScope.basketsize=basketProvider.BasketSize();
  	 }
 
 });

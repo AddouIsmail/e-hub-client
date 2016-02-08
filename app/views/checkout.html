@@ -1,35 +1,29 @@
 <div class="container">
 	<div class="check">	 
 			 <div class="col-md-3 cart-total">
-			 <a class="continue" href="#">Continue to basket</a>
+			 <a class="continue" href="#">Continuer le shopping</a>
 			 <div class="price-details">
-				 <h3>Price Details</h3>
+				 <h3>Détails des prix</h3>
 				 <span>Total</span>
 				 <span class="total1">{{totalPrice}}</span>
-				 <span>Discount</span>
+				 <span>Remise</span>
 				 <span class="total1">---</span>
-				 <span>Delivery Charges</span>
-				 <span class="total1">100.00</span>
+				 <span>Frais de services</span>
+				 <span class="total1">{{serviceCharges}}</span>
 				 <div class="clearfix"></div>				 
 			 </div>	
 			 <ul class="total_price">
 			   <li class="last_price"> <h4>TOTAL</h4></li>	
-			   <li class="last_price"><span>{{totalPrice+100}}</span></li>
+			   <li class="last_price"><span>{{totalPrice+serviceCharges}}</span></li>
 			   <div class="clearfix"> </div>
 			 </ul>
 			
 			 
 			 <div class="clearfix"></div>
-			 <a class="order" href="#">Place Order</a>
-			 <div class="total-item">
-				 <h3>OPTIONS</h3>
-				 <h4>COUPONS</h4>
-				 <a class="cpns" href="#">discount</a>
-				 <p><a href="#">Log In</a> to use accounts - linked coupons</p>
-			 </div>
+			 <a class="order" data-toggle="modal" data-target="#squarespaceModal">Effectuer la commande</a>
 			</div>
 		 <div class="col-md-9 cart-items" ng-init="compteur=1">
-			 <h1>My Shopping Bag (2)</h1>
+			 <h1>Mon panier ({{basketsize}})</h1>
 			 <div ng-repeat="product in basket">	
 				 <div class="cart-header">
 				 			
@@ -42,11 +36,11 @@
 							<h3><a href="#">{{product.name}}</a><span>Model No: {{product.id}}</span></h3>
 							<ul class="qty">
 								<li><p>Size : 5</p></li>
-								<li><p>Qty : {{product.quantity}}</p></li>
+								<li><p>Qty : {{product.quantityOrdered}}</p></li>
 							</ul>
 							
 								 <div class="delivery">
-								 <p>Service Charges : Rs.100.00</p>
+								 <p>Service Charges : {{product.shippedPrice}}DH</p>
 								 <span>Delivered in 2-3 bussiness days</span>
 								 <div class="clearfix"></div>
 					        </div>	
@@ -59,6 +53,34 @@
 		 </div>
 		 
 		
-			<div class="clearfix"> </div>
+		<div class="clearfix"> </div>
 	 </div>
 	 </div>
+
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h3 class="modal-title" id="lineModalLabel">My Modal</h3>
+		</div>
+		<div class="modal-body">
+			
+			
+		</div>
+		<div class="modal-footer">
+			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+				</div>
+				<div class="btn-group btn-delete hidden" role="group">
+					<button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>

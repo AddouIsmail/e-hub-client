@@ -13,6 +13,7 @@ angular.module('eHubClientApp').service('basketProvider', function ($cookies) {
     }
 
     this.add = function (item) {
+        console.log(item);
         var Basket =[];
         Basket=$cookies.getObject('basket');
         if(Basket!=null){
@@ -55,11 +56,19 @@ angular.module('eHubClientApp').service('basketProvider', function ($cookies) {
         var sum=0;
         if(Basket!=null)
         for (var i = Basket.length - 1; i >= 0; i--) {
-            sum+=parseFloat(Basket[i].shippedPrice);
+            sum+=parseFloat(Basket[i].buyPrice)*parseFloat(Basket[i].quantityOrdered);
         };
         return sum;
     }
 
+    this.BasketTotalServiceCharges=function(){
+        var Basket=this.getBasketItems();
+        var sum=0;
+        this.getBasketItems().forEach(function(entry) {    
+            sum+=entry.shippedPrice;
+        });
+        return sum;
+    }
     this.BasketSize=function(){
         var Basket=this.getBasketItems();
         if (Basket==null)

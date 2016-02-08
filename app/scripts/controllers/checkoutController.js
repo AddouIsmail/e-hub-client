@@ -34,5 +34,7 @@
  		$rootScope.totalPrice=basketProvider.computeSum();
  		$rootScope.basketsize=basketProvider.BasketSize();
  	}
+	$scope.serviceCharges=basketProvider.BasketTotalServiceCharges();
+
  });
 
