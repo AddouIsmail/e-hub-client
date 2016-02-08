@@ -31,6 +31,22 @@ angular.module('eHubClientApp').service('basketProvider', function ($cookies) {
         $cookies.remove('basket')     ;
         return this.getBasketItems();
     }
+
+    this.clearFromBasket=function(product){
+        var compt=0;
+        var Basket=this.getBasketItems();
+        this.getBasketItems().forEach(function(entry) {    
+
+            if(entry.id==product.id){
+                console.log('compteur: '+compt);
+                Basket.splice(compt,1); 
+                return;
+            }
+            compt++;
+        });
+        $cookies.putObject('basket',Basket);
+        return this.getBasketItems();
+    }
     
     
 
@@ -39,7 +55,7 @@ angular.module('eHubClientApp').service('basketProvider', function ($cookies) {
         var sum=0;
         if(Basket!=null)
         for (var i = Basket.length - 1; i >= 0; i--) {
-            sum+=parseFloat(Basket[i].price)*parseInt(Basket[i].quantity);
+            sum+=parseFloat(Basket[i].shippedPrice);
         };
         return sum;
     }

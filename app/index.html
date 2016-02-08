@@ -19,7 +19,7 @@
 
         <!-- endbuild -->
     </head>
-    <body ng-app="eHubClientApp" ng-controller="loginCtrl">
+    <body ng-app="eHubClientApp" ng-controller="IndexCtrl">
         <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -80,10 +80,10 @@
                                 <a ng-href="#/register">REGISTER</a>
                             </div>
                             <div class="cart box_1" ng-show="currentUser!=null">
-                                <a href="checkout.html">
+                                <a ng-href="#/checkout">
                                     <h3><span>${{totalPrice}}</span> ({{basketsize}} items)<img src="images/bag.png" alt=""></h3>
                                 </a>    
-                                <p><a href="" class="">(empty card)</a></p>
+                                <p><a ng-click="clearBasket()" class="">(empty card)</a></p>
                                 <div class="clearfix"> </div>
                             </div>
                             <div ng-show="currentUser!=null" style="float:right;">
@@ -638,6 +638,7 @@
         <script src="scripts/services/product.js"></script>
         <script src="scripts/services/category.js"></script>
         <script src="scripts/services/client.js"></script>
+        <script src="scripts/services/checkout.js"></script>
         <!-- END services -->
         <!-- controllers -->        
         <script src="scripts/controllers/indexController.js"></script>
@@ -647,6 +648,7 @@
         <script src="scripts/controllers/productController.js"></script>
         <script src="scripts/controllers/clientController.js"></script>
         <script src="scripts/controllers/productDetailsController.js"></script>
+        <script src="scripts/controllers/checkoutController.js"></script>
         <!-- END controllers -->
 
         <!-- filters -->
