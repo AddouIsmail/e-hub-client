@@ -15,7 +15,7 @@
 		<section  class="sky-form">
 			<h4>sous-catogories</h4>
 			<div class="row1 scroll-pane">
-				<label class="checkbox" ng-repeat="category in categories | filter: {'superCategory': currentCategory.superCategory } | filter: {'superSuperCategory': currentCategory.superSuperCategory } | filter: {'superSuperCategory': chosenSuperCategory } ">
+				<label class="checkbox" ng-repeat="category in categories | filter: {'superCategory': currentCategory.superCategory } | filter: {'superSuperCategory': currentCategory.superSuperCategory} | filter: {'superSuperCategory': chosenSuperCategory } | unique: 'name' ">
 					<input type="checkbox" name="checkbox" ng-checked="category.name == currentCategory.name" ng-click="addToChosenCat(category.id)"><i></i>{{ category.name }}
 				</label>								
 			</div>
@@ -23,13 +23,13 @@
 		<section  class="sky-form">
 			<h4>marques</h4>
 			<div class="row1 scroll-pane">												
-				<label class="checkbox" ng-repeat="product in products | filter: {'idCategory': currentCategory.id } | unique: 'brand'">
+				<label class="checkbox" ng-repeat="product in products | filterWithOr : {'idCategory' : (chosenCategories.length == 0? '':chosenCategories)} | filterWithOr : {'idCategory' : (chosenBisCategories.length == 0? '':chosenBisCategories)} | unique: 'brand'">
 					<input type="checkbox" name="checkbox" ng-click="addToChosenBrand(product.brand)"><i></i>{{ product.brand }}
 				</label>							
 			</div>
 		</section>
 		<section class="sky-form">
-			<h4>colour</h4>
+			<h4>couleurs</h4>
 			<ul class="w_nav2">
 				<li><a class="color1" href="#"></a></li>
 				<li><a class="color2" href="#"></a></li>
@@ -54,10 +54,10 @@
 			</ul>
 		</section>
 		<section class="sky-form">
-			<h4>discount</h4>
+			<h4>remise (>=)</h4>
 			<div class="row1 scroll-pane">
 				<div class="col col-4">
-					<label class="radio" ng-repeat="i in [90,80,70,60,50,40,30,20,10]"><input type="radio" name="radio" ng-click="setChosenDiscount(i)"><i></i>{{ i }} %</label>					
+					<label class="radio" ng-repeat="i in [100,90,80,70,60,50,40,30,20,10,0]"><input type="radio" name="radio" ng-click="setChosenDiscount(i)" value="{{ i }}"><i></i>{{ i }} %</label>					
 				</div>
 			</div>						
 		</section>
@@ -76,7 +76,7 @@
 		     <div class="clearfix"></div>	
 		</div>
 		<!-- grids_of_4 -->
-		<div ng-repeat="product in filtered = (products | filterWithOr : {'idCategory' : (chosenCategories.length == 0? '':chosenCategories)} | filterWithOr : {'brand' : (chosenBrands.length == 0? '':chosenBrands)} | filter : {'discount': chosenDiscount} | filter : {'superSuperCategory' : chosenSuperCategory})">									
+		<div ng-repeat="product in filtered = (products | filterWithOr : {'idCategory' : (chosenCategories.length == 0? '':chosenCategories)} | filterWithOr : {'brand' : (chosenBrands.length == 0? '':chosenBrands)} | filterWithOr : {'idCategory' : (chosenBisCategories.length == 0? '':chosenBisCategories)} | filter : (chosenDiscount == undefined)? '':greaterThan('discount', chosenDiscount) | filter:search:strict)">									
 			<div class="grid1_of_4" style="margin:7px;">
 				<div class="content_box"><a href="details.html">
 					<img src="http://localhost:8080/pictures/products/{{ product.name }}/{{ product.pictures[0] }}" class="img-responsive" alt=""/>
@@ -96,6 +96,6 @@
 	<!-- end content -->
 </div>
 </div>
-<div ng-repeat="product in products | filter : {'idCategory' : chosenCategories }">
+<div ng-repeat="product in products">
 	{{ product }}
 </div>

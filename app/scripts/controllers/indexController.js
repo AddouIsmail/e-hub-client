@@ -11,5 +11,5 @@ angular.module('eHubClientApp')
 	.controller('IndexCtrl',function($scope, Category) {		
 		var allCategories = Category.query(function() {
 			$scope.categories=allCategories;
-		 }); //query() returns all the entries
+		}); //query() returns all the entries
 });
