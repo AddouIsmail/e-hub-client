@@ -1,3 +1,99 @@
-<div class="jumbotron">
- Content
+<h3 class="text-center" style="margin-top:20px;">Nouveautés</h3>
+<div class="arriv">
+	<div class="container">		
+		<div class="arriv-top">		
+			<div class="col-md-6 arriv-left">
+				<img src="images/1.jpg" class="img-responsive" alt="">
+				<div class="arriv-info">
+					<h3>BOTTES & BOTTINES FEMMES</h3>
+					<p>Collection hiver 2016</p>
+					<div class="crt-btn">
+						<a href="/#/products/56b8ba75040955be9471f08f">Découvrir</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 arriv-right">
+				<img src="images/2.jpg" class="img-responsive" alt="">
+				<div class="arriv-info">
+					<h3>VESTES & MANTEAUX HOMMES</h3>
+					<div class="crt-btn">
+						<a href="/#/products/56b8ba75040955be9471f080">Découvrir</a>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="arriv-bottm">
+			<div class="col-md-8 arriv-left1">
+				<img src="images/3.jpg" class="img-responsive" alt="">
+				<div class="arriv-info1">
+					<h3 style="text-shadow: 2px 2px black;">TELEPHONES 4G</h3>
+					<p style="text-shadow: 2px 2px black;">Nouvelle marques disponibles</p>
+					<div class="crt-btn">
+						<a href="/#/products/1">Découvrir</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 arriv-right1">
+				<img src="images/4.jpg" class="img-responsive" alt="">
+				<div class="arriv-info2">
+					<a href="/#/products/56b8ba75040955be9471f07c"><h3>Chaussures de sport<i class="ars"></i></h3></a>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="arriv-las">
+			<div class="col-md-4 arriv-left2">
+				<img src="images/5.jpg" class="img-responsive" alt="">
+				<div class="arriv-info2">
+					<a style="text-shadow: 2px 2px black;" href="/#/products/56b8ba75040955be9471f08a"><h3>Lunettes<i class="ars"></i></h3></a>
+				</div>
+			</div>
+			<div class="col-md-4 arriv-middle">
+				<img src="images/6.jpg" class="img-responsive" alt="">
+				<div class="arriv-info3">
+					<h3 style="text-shadow: 2px 2px black;">Bijouterie</h3>
+					<div class="crt-btn">
+						<a href="#/products/56b8ba75040955be9471f09b">Découvrir</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 arriv-right2">
+				<img src="images/7.jpg" class="img-responsive" alt="">
+				<div class="arriv-info2">
+					<a href="/#/products/56b8ba75040955be9471f085"><h3>Montres élégantes<i class="ars"></i></h3></a>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<div class="special">
+	<div class="container">
+		<h3 style="margin-bottom:20px;">Offres spéciales</h3>
+		<div class="specia-top">
+			<ul class="grid_2">
+				<li ng-repeat="product in products | orderBy:discount | limitTo:4">
+					<a href="details.html"><img src="images/8.jpg" class="img-responsive" alt=""></a>
+					<div class="special-info grid_1 simpleCart_shelfItem">
+						<h5>{{ product.name }}</h5>
+						<h6>{{ product.buyPrice-(product.buyPrice * product.discount) }} DHS <span style="font-size:0.9em; text-decoration: line-through;color:red;">{{ product.buyPrice }} DHS</span></h6>
+						<div class="item_add"><span class="item_price"><a data-toggle="modal" data-target="#myModal" ng-click="addToBasket(product.id,product.idCategory,product.idSupplier,product.name,product.description,product.discount,product.quantity,product.shippedPrice)">Ajouter au panier</a></span></div>
+					</div>
+				</li>		
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top:250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Produit ajouté au panier</h4>
+      </div>          
+    </div>
+  </div>
 </div>

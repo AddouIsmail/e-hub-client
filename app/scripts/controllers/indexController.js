@@ -8,13 +8,17 @@
  * Controller of the eHubClientApp
  */
 angular.module('eHubClientApp')
-	.controller('IndexCtrl',function($scope, Category,$rootScope,$http,ClientService) {		
+	.controller('IndexCtrl',function($scope, Category, Product,$rootScope,$http,ClientService) {		
 
 		var allCategories = Category.query(function() {
 			$scope.categories=allCategories;
 		 }); //query() returns all the entries
 
-		  $rootScope.LoginAction=function(login,pass){
+		var allProducts = Product.query(function() {
+			$scope.products=allProducts;
+		}); //query() returns all the entries
+
+		$rootScope.LoginAction=function(login,pass){
 		    $http.get('http://localhost:8080/client/authentification/'+login).success(function (argument) {
 		        if(argument.login==login && argument.password==pass){
 		            console.log('authenticated');
@@ -30,19 +34,17 @@ angular.module('eHubClientApp')
 		    });             
 		};
 
-$rootScope.currentUser=ClientService.getall();
-$rootScope.DisconnectAction=function(){
-    if($rootScope.currentUser==null)
-        console.log("null");
-    else
-        console.log('before: '+$rootScope.currentUser);
-    ClientService.removeUserCookie();
-    if($rootScope.currentUser==null)
-        console.log("null");
-    else
-        console.log('after: '+$rootScope.currentUser);          
-    $rootScope.currentUser=null;
-}
-
-
+		$rootScope.currentUser=ClientService.getall();
+		$rootScope.DisconnectAction=function(){
+		    if($rootScope.currentUser==null)
+		        console.log("null");
+		    else
+		        console.log('before: '+$rootScope.currentUser);
+		    ClientService.removeUserCookie();
+		    if($rootScope.currentUser==null)
+		        console.log("null");
+		    else
+		        console.log('after: '+$rootScope.currentUser);          
+		    $rootScope.currentUser=null;
+		}
 });
