@@ -32,11 +32,11 @@
                     <div class="top_right">
                         <ul>
                             <li><a ng-href="#/contact">Contact</a></li>|
-                            <li><a ng-href="#/about">About</a></li>
+                            <li><a ng-href="#/about">à propos</a></li>
                         </ul>
                     </div>
                     <div class="top_left">
-                        <h2><span></span> Call us : 032 2352 782</h2>
+                        <h2><span></span> Service clientèle : 032 2352 782 (24h/24, 7j/7)</h2>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -82,9 +82,9 @@
                             </div>
                             <div class="cart box_1">
                                 <a ng-href="#/checkout">
-                                    <h3><span>${{totalPrice}}</span> ({{basketsize}} items)<img src="images/bag.png" alt=""></h3>
+                                    <h3><span>{{totalPrice}} DHS</span> ({{basketsize}} articles)<img src="images/bag.png" alt=""></h3>
                                 </a>    
-                                <p><a ng-click="clearBasket()" class="">(empty card)</a></p>
+                                <p><a ng-click="clearBasket()" data-toggle="modal" data-target="#myModal2">(Vider le panier)</a></p>
                                 <div class="clearfix"> </div>
                             </div>
                             <div ng-show="currentUser!=null" style="float:right; margin-top:13px">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="search">
                             <form>
-                                <input type="text" value="" placeholder="search...">
+                                <input type="text" ng-model="search" value="" placeholder="search...">
                                 <input type="submit" value="">
                             </form>
                         </div>
@@ -595,6 +595,17 @@
             </div>
         </div>
         <!-- End Footer -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top:250px;">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Votre panier est desormais vide !</h4>
+              </div>          
+            </div>
+          </div>
+        </div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
         <script>
