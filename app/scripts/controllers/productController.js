@@ -8,7 +8,7 @@
  * Controller of the eHubClientApp
  */
 angular.module('eHubClientApp')
-	.controller('ProductCtrl',function($http, $routeParams, $scope, Product,Category) {		
+	.controller('ProductCtrl',function($http ,$routeParams, $scope, $rootScope,Product,Category,basketProvider) {
 		$scope.currentCategory = Category.get({id: $routeParams.id});
 		//$scope.chosenSuperCategory = $scope.currentCategory.superSuperCategory;
 		console.log($scope.currentCategory);
@@ -69,4 +69,23 @@ angular.module('eHubClientApp')
 		var allCategories = Category.query(function() {
 			$scope.categories=allCategories;
 		}); //query() returns all the entries
-});
+		
+	 	$rootScope.basket=basketProvider.getBasketItems();
+	 	$rootScope.totalPrice=basketProvider.computeSum();
+	 	$rootScope.basketsize=basketProvider.BasketSize();
+
+ 	$rootScope.addToBasket=function(id,idCategory,idSupplier,name,description,discount,quantity,shippedPrice){
+		var productItem={"id":id, "idCategory": idCategory, "idSupplier":idSupplier ,"name":name,"description":description,"discount":discount , "quantity":quantity,"shippedPrice":shippedPrice};
+		console.log("add to basket controller method");
+		$rootScope.basket=basketProvider.add(productItem);
+		$rootScope.totalPrice=basketProvider.computeSum();
+		$rootScope.basketsize=basketProvider.BasketSize();																																
+ 	}
+
+		 $rootScope.clearBasket=function(){
+		 	console.log("clearbasket controller method");
+		 	$rootScope.basket=basketProvider.clearBasket();
+		 	$rootScope.totalPrice=basketProvider.computeSum();
+			$rootScope.basketsize=basketProvider.BasketSize();
+		 }
+		});

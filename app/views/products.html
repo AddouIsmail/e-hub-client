@@ -79,13 +79,17 @@
 		<div ng-repeat="product in filtered = (products | filterWithOr : {'idCategory' : (chosenCategories.length == 0? '':chosenCategories)} | filterWithOr : {'brand' : (chosenBrands.length == 0? '':chosenBrands)} | filterWithOr : {'idCategory' : (chosenBisCategories.length == 0? '':chosenBisCategories)} | filter : (chosenDiscount == undefined)? '':greaterThan('discount', chosenDiscount) | filter:search:strict)">									
 			<div class="grid1_of_4" style="margin:7px;">
 				<div class="content_box"><a href="details.html">
-					<img src="http://localhost:8080/pictures/products/{{ product.name }}/{{ product.pictures[0] }}" class="img-responsive" alt=""/>
+					<img src="/images/w{{ $index+1 }}.jpg" class="img-responsive" alt=""/>
 					</a>
-					<h4><a href="details.html"> {{ product.name }}</a></h4>
+					<h4><a ng-href="#/product/{{ product.id }}"> {{ product.name }}</a></h4>
 					<p>{{ product.description }}</p>
 					<div class="grid_1 simpleCart_shelfItem">
-						<div class="item_add"><span class="item_price"><h6>{{ product.buyPrice * product.discount }} DHS</h6></span></div>
-						<div class="item_add"><span class="item_price"><a href="#">ajouter au panier</a></span></div>
+						<div class="item_add">
+							<span class="item_price">
+								<h5>{{ product.buyPrice-(product.buyPrice * product.discount) }} DHS <span ng-show="product.discount>0" style="font-size:0.9em; text-decoration: line-through;color:red;">{{ product.buyPrice }} DHS</span></h5>								
+							</span>
+						</div>
+						<div class="item_add"><span class="item_price"><a ng-click="addToBasket(product.id,product.idCategory,product.idSupplier,product.name,product.description,product.discount,product.quantity,product.shippedPrice)" data-toggle="modal" data-target="#myModal">ajouter au panier</a></span></div>
 					</div>
 			   	</div>
 			</div>
@@ -96,6 +100,14 @@
 	<!-- end content -->
 </div>
 </div>
-<div ng-repeat="product in products">
-	{{ product }}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top:250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Produit ajouté au panier</h4>
+      </div>          
+    </div>
+  </div>
 </div>
