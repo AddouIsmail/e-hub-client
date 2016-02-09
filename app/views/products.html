@@ -78,10 +78,10 @@
 		<!-- grids_of_4 -->
 		<div ng-repeat="product in filtered = (products | filterWithOr : {'idCategory' : (chosenCategories.length == 0? '':chosenCategories)} | filterWithOr : {'brand' : (chosenBrands.length == 0? '':chosenBrands)} | filterWithOr : {'idCategory' : (chosenBisCategories.length == 0? '':chosenBisCategories)} | filter : (chosenDiscount == undefined)? '':greaterThan('discount', chosenDiscount) | filter:search:strict)">									
 			<div class="grid1_of_4" style="margin:7px;">
-				<div class="content_box"><a href="details.html">
+				<div class="content_box"><a href="/#/product/{{product.id}}">
 					<img src="/images/w{{ $index+1 }}.jpg" class="img-responsive" alt=""/>
 					</a>
-					<h4><a ng-href="/#/product/{{ product.id }}"> {{ product.name }}</a></h4>
+					<h4><a ng-href="/#/product/{{product.id}}"> {{ product.name }}</a></h4>
 					<p>{{ product.description }}</p>
 					<div class="grid_1 simpleCart_shelfItem">
 						<div class="item_add">
