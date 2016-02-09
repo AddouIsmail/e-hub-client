@@ -9,7 +9,7 @@
  */
 angular.module('eHubClientApp')
 	.controller('IndexCtrl',function($scope, Category,$rootScope,$http,ClientService) {		
-
+		$rootScope.date=new Date();
 		var allCategories = Category.query(function() {
 			$scope.categories=allCategories;
 		 }); //query() returns all the entries

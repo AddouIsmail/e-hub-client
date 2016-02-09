@@ -1,86 +1,115 @@
+
 <div class="container">
 	<div class="check">	 
-			 <div class="col-md-3 cart-total">
-			 <a class="continue" href="#">Continuer le shopping</a>
-			 <div class="price-details">
-				 <h3>Détails des prix</h3>
-				 <span>Total</span>
-				 <span class="total1">{{totalPrice}}</span>
-				 <span>Remise</span>
-				 <span class="total1">---</span>
-				 <span>Frais de services</span>
-				 <span class="total1">{{serviceCharges}}</span>
-				 <div class="clearfix"></div>				 
-			 </div>	
-			 <ul class="total_price">
-			   <li class="last_price"> <h4>TOTAL</h4></li>	
-			   <li class="last_price"><span>{{totalPrice+serviceCharges}}</span></li>
-			   <div class="clearfix"> </div>
-			 </ul>
+		<div class="col-md-3 cart-total">
+			<a class="continue" href="#">Continuer le shopping</a>
+			<div class="price-details">
+				<h3>Détails des prix</h3>
+				<span>Total</span>
+				<span class="total1">{{totalPrice}}</span>
+				<span>Remise</span>
+				<span class="total1">---</span>
+				<span>Frais de services</span>
+				<span class="total1">{{serviceCharges}}</span>
+				<div class="clearfix"></div>				 
+			</div>	
+			<ul class="total_price">
+				<li class="last_price"> <h4>TOTAL</h4></li>	
+				<li class="last_price"><span>{{totalPrice+serviceCharges}}</span></li>
+				<div class="clearfix"> </div>
+			</ul>
 			
-			 
-			 <div class="clearfix"></div>
-			 <a class="order" data-toggle="modal" data-target="#squarespaceModal">Effectuer la commande</a>
-			</div>
-		 <div class="col-md-9 cart-items" ng-init="compteur=1">
-			 <h1>Mon panier ({{basketsize}})</h1>
-			 <div ng-repeat="product in basket">	
-				 <div class="cart-header">
-				 			
-					 <div class="close1" ng-click="removeFromBasket(product)"> </div>
-					 <div class="cart-sec simpleCart_shelfItem">
-							<div class="cart-item cyc">
-								 <img src="images/8.jpg" class="img-responsive" alt=""/>
-							</div>
-						   <div class="cart-item-info">
+
+			<div class="clearfix"></div>
+			<a class="order" data-toggle="modal" data-target="#contact" data-original-title>Effectuer la commande</a>
+		</div>
+		<div class="col-md-9 cart-items" ng-init="compteur=1">
+			<h1>Mon panier ({{basketsize}})</h1>
+			<div ng-repeat="product in basket">	
+				<div class="cart-header">
+
+					<div class="close1" ng-click="removeFromBasket(product)"> </div>
+					<div class="cart-sec simpleCart_shelfItem">
+						<div class="cart-item cyc">
+							<img src="images/8.jpg" class="img-responsive" alt=""/>
+						</div>
+						<div class="cart-item-info">
 							<h3><a href="#">{{product.name}}</a><span>Model No: {{product.id}}</span></h3>
 							<ul class="qty">
 								<li><p>Size : 5</p></li>
 								<li><p>Qty : {{product.quantityOrdered}}</p></li>
 							</ul>
 							
-								 <div class="delivery">
-								 <p>Service Charges : {{product.shippedPrice}}DH</p>
-								 <span>Delivered in 2-3 bussiness days</span>
-								 <div class="clearfix"></div>
-					        </div>	
-						   </div>
-						   <div class="clearfix"></div>
-												
-					  </div>
-				 </div>	
-			 </div>
-		 </div>
-		 
+							<div class="delivery">
+								<p>Service Charges : {{product.shippedPrice}}DH</p>
+								<span>Delivered in 2-3 bussiness days</span>
+								<div class="clearfix"></div>
+							</div>	
+						</div>
+						<div class="clearfix"></div>
+
+					</div>
+				</div>	
+			</div>
+		</div>
+
 		
 		<div class="clearfix"> </div>
-	 </div>
-	 </div>
-
-<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			<h3 class="modal-title" id="lineModalLabel">My Modal</h3>
-		</div>
-		<div class="modal-body">
-			
-			
-		</div>
-		<div class="modal-footer">
-			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+	</div>
+</div>
+<div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span> Effectuer votre commande.</h4>
+			</div>
+			<form action="#" method="post" accept-charset="utf-8">
+				<div class="modal-body" style="padding: 5px;">
+					<form>
+						<div class="row">
+							<div class="col-lg-4 col-lg-offset-1">
+								<div class="form-group">
+									<label for="inputEmail">Login</label>
+									<label type="email" class="form-control" id="inputEmail" placeholder="Email" disabled>{{currentUser.login}}</label>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword">Date de la commande:</label>
+									<label type="text" class="form-control" id="inputPassword" placeholder="Password" disabled>{{date | date:'yyyy-MM-dd'}}</label>
+								</div>									
+								<div class="form-group">
+									<label for="inputPassword">Total frais:</label>
+									<label type="text" class="form-control" id="inputPassword" placeholder="Password" disabled>{{serviceCharges}}DH</label>
+								</div>		
+								<div class="form-group">
+									<label for="inputPassword">Total prix:</label>
+									<label type="text" class="form-control" id="inputPassword" placeholder="Password" disabled>{{totalPrice}}DH</label>
+								</div>	
+								<div class="form-group">
+									<label for="inputPassword">Total remise:</label>
+									<label type="text" class="form-control" id="inputPassword" placeholder="Password" disabled></label>
+								</div>	
+							</div>
+							<div class="col-lg-5 col-lg-offset-1" style="margin-top:65px">
+								<div class="form-group">
+									<label for="inputPassword">Adresse:</label>
+									<textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7">{{currentUser.address}}</textarea>
+									<div class="checkbox">
+									<label><input type="checkbox" ng-model="userAdress" value="">Utiliser ma propre adresse</label>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>  
+				<div class="panel-footer" style="margin-bottom:-14px;">
+					<input type="submit" class="btn btn-success" value="Send"/>
+					<!--<span class="glyphicon glyphicon-ok"></span>-->
+					<input type="reset" class="btn btn-danger" value="Clear" />
+					<!--<span class="glyphicon glyphicon-remove"></span>-->
+					<button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
 				</div>
-				<div class="btn-group btn-delete hidden" role="group">
-					<button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
-				</div>
+					</form>
 			</div>
 		</div>
 	</div>
-  </div>
 </div>
