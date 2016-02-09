@@ -80,7 +80,7 @@
 					</div>
 					<div>					
 						<div class="btn_form" style="margin:10px;">
-							<a ng-click="addToBasket(product.id,product.idCategory,product.idSupplier,product.name,product.description,product.discount,product.quantity,product.shippedPrice,product.buyPrice,value)">Ajouter au panier</a>
+							<a ng-click="addToBasket(product.id,product.idCategory,product.idSupplier,product.name,product.description,product.discount,product.quantity,product.shippedPrice,product.buyPrice,value)" data-toggle="modal" data-target="#myModal">Ajouter au panier</a>
 						</div>
 
 					</div>
@@ -90,7 +90,7 @@
 					<p class="prod-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option</p>
 				</div>
 				<div class="single-bottom2">
-					<h6>Related Products</h6>
+					<h6>Produits similaires</h6>
 					<div ng-repeat="p in products|limitTo:3 | filter:product.category">
 						<div class="product">
 							<div class="product-desc">
@@ -105,7 +105,7 @@
 							</div>
 							<div class="product_price">
 								<span class="price-access">${{p.buyPrice}}</span>								
-								<button class="button1" ng-click="addToBasket(p.id,p.idCategory,p.idSupplier,p.name,p.description,p.discount,p.quantity,p.shippedPriceproduct.buyPrice,value)"><span>Add to cart</span></button>
+								<button class="button1" ng-click="addToBasket(p.id,p.idCategory,p.idSupplier,p.name,p.description,p.discount,p.quantity,p.shippedPriceproduct.buyPrice,value)" data-toggle="modal" data-target="#myModal"><span>Ajouter au panier</span></button>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -117,4 +117,15 @@
 		</div>
 		<!-- end content -->
 	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top:250px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Produit ajouté au panier</h4>
+      </div>          
+    </div>
+  </div>
 </div>
