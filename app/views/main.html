@@ -78,7 +78,7 @@
 					<div class="special-info grid_1 simpleCart_shelfItem">
 						<h5>{{ product.name }}</h5>
 						<h6>{{ product.buyPrice-(product.buyPrice * product.discount) }} DHS <span style="font-size:0.9em; text-decoration: line-through;color:red;">{{ product.buyPrice }} DHS</span></h6>
-						<div ng-show="product.quantity != 0" class="item_add"><span class="item_price"><a data-toggle="modal" data-target="#myModal" ng-click="addToBasket(product.id,product.idCategory,product.idSupplier,product.name,product.description,product.discount,product.quantity,product.shippedPrice)">Ajouter au panier</a></span></div>
+						<div ng-show="product.quantity != 0" class="item_add"><span class="item_price"><a data-toggle="modal" data-target="#myModal" ng-click="addToBasket(product.id,product.idCategory,product.idSupplier,product.name,product.description,product.discount,product.quantity,product.shippedPrice,product.buyPrice,1)">Ajouter au panier</a></span></div>
 						<div ng-show="product.quantity == 0" class="item_add"><span class="item_price"><a style="text-decoration:none;color:black">Indisponible</a></span></div>					
 					</div>
 				</li>		
